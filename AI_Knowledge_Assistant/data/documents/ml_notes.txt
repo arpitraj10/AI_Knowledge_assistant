@@ -1,0 +1,42 @@
+Types of Data: Structured (SQL), Unstructured (needs pre-processing, image, video, audio, emails), Semi-Structured (email headers, logs).
+
+Properties: Volume, Velocity (speed new data generated, collected and processed, sensor data from IOT, HFT), Variety (source: structured, semi, unstructured, system collecting data from medical devices, wearables.)
+
+Data Warehouse: structured format, complex queries ETL (extract, transform, load), start or snowflake schema. Amazon Redshift. Less agile if schema changes. More Expensive. BI, Analytics.
+
+Data Lake: raw data, can be all 3 types, no predefined schema, batch real time, may have some preprocessing, S3, AWS glue to extract the schema, Athena. ELT (Extract, Load, Transform). More agile due to not having defined schema. Can add up fast if a lot of data. Used for ML.
+
+Data Lakehouse: 3 types of data, Data Analytics and ML, Data in S3 but using Redshift to read it.
+
+Data Mesh: Each organization owns its own data. However there is central process on organization the data.
+
+AWS Glue can do ETL and ELT. Orchestration of the data: EventBridge, Lambda, Step Functions, Glue workflows, Amazon managed workflows for apache airflow.
+
+Source: JDBC, ODBC (platform independent), Raw Log files, API, Stream Data.
+
+Data Format: CSV: (small/medium systems, import/export), JSON: (structured/semi-structured, webserver-webclient, config, flex schema), Avro: (Data and Schema, use in big data, efficient serialization for data between systems, Apache Kafka/spark/flinch, Hadoop), Parquet: (optimized by analytics, columns and rows, large data sets, a lot of columns on each row but need small number of the rows, Hadoop, Redshift, Apache Kafka/Spark/Finch)
+
+S3: 5GB (> use multi part upload), Replication: version must be enabled, no chain replication. Use batch replication to replicate existing objects. Delete Object will not be replicated. Low latency, high throughput.
+
+S3: infrequent access:
+
+Become a member
+S3: glacier : archive/backup. Instant retrieval: once a quarter, minimum storage 90 days. Flexible Retrieval: Expedited (1–2 min ), standard (3–5 h), bulk (5–12 h). Min storage duration 90 days. Glacier Deep Archive: standard(12), bulk (48 h) Min Storage 180 days.
+
+S3: intelligent tiering: small monthly fee for tiering the objects.
+
+S3 encryption: Server (SSE, KMS, SSE-C (client provides the key)), Client
+
+EBS: Performance Settings: Enhanced (elastic: scale out automatically, provisioned: pay for it in advance), Bursting. Additinal setting for both Enhanced and Bursting: (General Purpose: high performance and latency sensitive. Max IO: parallel workflow that can tolerate high latency, big data).
+
+EFS: created across AZ, only linux.
+
+Amazon FSx: 3rd part performance file system. (Lustre, Windows File server, NetApp ONTAP, Open ZFS)
+
+Fsx Windows: supports SMB protocol and NTFS, AD and ACL user groups, can be mounted on linux, supports DFS (distributed file system), daily backup of the data to S3. Scale up to 10s of GB/s, millions of IOPS, 100s of PB data. SSD (latency sensitive workflows: database, media processing) and HDD (broad spectrum: home directory, CMS)
+
+Fsx for Lustre: type of parallel distributed file system for large scale computing. Machine Learning, HPC, SSD, HDD, seamless integration with S3, can be used in AD and VPC on premise.
+
+FSx deployment: scratch file system, temporary storage, one copy of the data. Persistent file system: file replaces within minutes, long term processing, sensitive data.
+
+NetApp ONTAP: NFS, SMB, works with Linux, Windows, macos, Amazon workspace and Appstream, EC@, ECS, EKS, storage shrinks and grows automatically, snapshot, replication low cost, compression.
