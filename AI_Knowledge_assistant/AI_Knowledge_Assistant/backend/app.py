@@ -1,10 +1,13 @@
 from fastapi import FastAPI
-from dotenv import load_dotenv
+from pydantic import BaseModel
+from rag_pipeline import generate_answer
 
-load_dotenv()
+app = FastAPI(title="AI Knowledge Assistant")
 
-app = FastAPI(title="AI Knowledge Assistant Backend")
+class QueryRequest(BaseModel):
+    question: str
 
-@app.get("/")
-def health():
-    return {"status": "Backend running with Endee"}
+@app.post("/ask")
+def ask_ai(request: QueryRequest):
+    answer = generate_answer(request.question)
+    return {"answer": answer}
