@@ -3,4 +3,5 @@ uvicorn
 python-dotenv
 requests
 langchain
-openai
+langchain-openai
+tiktoken
